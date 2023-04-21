@@ -114,7 +114,7 @@ export default defineComponent({
           !collapsed && `${mergedClsPrefix}-collapse-item--active`
         ]}
       >
-        <div
+        <a
           class={[
             `${mergedClsPrefix}-collapse-item__header`,
             !collapsed && `${mergedClsPrefix}-collapse-item__header--active`
@@ -158,7 +158,7 @@ export default defineComponent({
               </div>
             )
           )}
-        </div>
+        </a>
         <NCollapseItemContent
           clsPrefix={mergedClsPrefix}
           displayDirective={mergedDisplayDirective}

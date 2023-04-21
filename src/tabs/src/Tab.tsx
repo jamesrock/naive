@@ -119,7 +119,7 @@ export default defineComponent({
               : this.$attrs
           )}
         >
-          <span class={`${clsPrefix}-tabs-tab__label`}>
+          <a class={`${clsPrefix}-tabs-tab__label`}>
             {internalAddable ? (
               <>
                 <div class={`${clsPrefix}-tabs-tab__height-placeholder`}>
@@ -138,7 +138,7 @@ export default defineComponent({
             ) : (
               render(mergedTab ?? name)
             )}
-          </span>
+          </a>
           {mergedClosable && this.type === 'card' ? (
             <NBaseClose
               clsPrefix={clsPrefix}
