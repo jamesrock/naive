@@ -52,7 +52,7 @@ export default defineComponent({
         if (props.disabled) return
         handleClose(props.name)
       },
-      activateTab () {
+      activateTab (e: MouseEvent) {
         if (props.disabled) return
         if (props.internalAddable) {
           handleAdd()
@@ -74,6 +74,7 @@ export default defineComponent({
             })
           }
         }
+        e.preventDefault()
       }
     }
   },
@@ -97,10 +98,11 @@ export default defineComponent({
         {this.internalLeftPadded ? (
           <div class={`${clsPrefix}-tabs-tab-pad`} />
         ) : null}
-        <div
+        <a
           key={name}
           data-name={name}
           data-disabled={disabled ? true : undefined}
+          href="#"
           {...mergeProps(
             {
               class: [
@@ -119,7 +121,7 @@ export default defineComponent({
               : this.$attrs
           )}
         >
-          <a class={`${clsPrefix}-tabs-tab__label`}>
+          <span class={`${clsPrefix}-tabs-tab__label`}>
             {internalAddable ? (
               <>
                 <div class={`${clsPrefix}-tabs-tab__height-placeholder`}>
@@ -138,7 +140,7 @@ export default defineComponent({
             ) : (
               render(mergedTab ?? name)
             )}
-          </a>
+          </span>
           {mergedClosable && this.type === 'card' ? (
             <NBaseClose
               clsPrefix={clsPrefix}
@@ -147,7 +149,7 @@ export default defineComponent({
               disabled={disabled}
             />
           ) : null}
-        </div>
+        </a>
       </div>
     )
   }

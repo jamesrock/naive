@@ -84,6 +84,7 @@ export default defineComponent({
         if (NCollapse && !props.disabled) {
           NCollapse.toggleItem(collapsedRef.value, mergedNameRef.value, e)
         }
+        e.preventDefault()
       }
     }
   },
@@ -114,15 +115,16 @@ export default defineComponent({
           !collapsed && `${mergedClsPrefix}-collapse-item--active`
         ]}
       >
-        <a
+        <div
           class={[
             `${mergedClsPrefix}-collapse-item__header`,
             !collapsed && `${mergedClsPrefix}-collapse-item__header--active`
           ]}
         >
-          <div
+          <a
             class={`${mergedClsPrefix}-collapse-item__header-main`}
             onClick={this.handleClick}
+            href="#"
           >
             {arrowPlacement === 'right' && headerNode}
             <div
@@ -145,7 +147,7 @@ export default defineComponent({
               ])}
             </div>
             {arrowPlacement === 'left' && headerNode}
-          </div>
+          </a>
           {resolveWrappedSlotWithProps(
             headerExtraSlot,
             { collapsed },
@@ -158,7 +160,7 @@ export default defineComponent({
               </div>
             )
           )}
-        </a>
+        </div>
         <NCollapseItemContent
           clsPrefix={mergedClsPrefix}
           displayDirective={mergedDisplayDirective}
