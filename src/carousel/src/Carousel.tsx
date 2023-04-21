@@ -57,7 +57,7 @@ const transitionProperties = [
 ] as const
 
 type TransitionStyle = Partial<
-Pick<CSSProperties, typeof transitionProperties[number]>
+Pick<CSSProperties, (typeof transitionProperties)[number]>
 >
 
 export const carouselProps = {
@@ -74,6 +74,10 @@ export const carouselProps = {
   },
   dotPlacement: {
     type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+    default: 'bottom'
+  },
+  arrowPlacement: {
+    type: String as PropType<'top' | 'bottom'>,
     default: 'bottom'
   },
   slidesPerView: {
@@ -880,6 +884,7 @@ export default defineComponent({
     const {
       mergedClsPrefix,
       showArrow,
+      arrowPlacement,
       userWantsControl,
       slideStyles,
       dotType,
@@ -936,6 +941,11 @@ export default defineComponent({
         onMouseenter={this.handleMouseenter}
         onMouseleave={this.handleMouseleave}
       >
+        {showArrow &&
+          arrowPlacement === 'top' &&
+          resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
+            <NCarouselArrow />
+          ])}
         <VResizeObserver onResize={this.handleResize}>
           {{
             default: () => (
@@ -977,6 +987,7 @@ export default defineComponent({
             />
           ])}
         {showArrow &&
+          arrowPlacement === 'bottom' &&
           resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
             <NCarouselArrow />
           ])}
